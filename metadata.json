@@ -1,0 +1,6 @@
+{
+  "name": "APP MÔ PHỎNG TRỰC QUAN",
+  "description": "Ứng dụng tương tác cho phép tải hình ảnh, click nhận diện đối tượng tự động và tạo mô phỏng từ văn bản.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
