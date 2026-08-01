@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import { GoogleGenAI, Type } from "@google/genai";
-import { createServer as createViteServer } from "vite";
+
 
 
 const app = express();
@@ -341,6 +341,8 @@ YÊU CẦU BẮT BUỘC:
 if (!process.env.VERCEL) {
   (async () => {
     if (process.env.NODE_ENV !== "production") {
+      const viteModule = "vite";
+      const { createServer: createViteServer } = await import(viteModule);
       const vite = await createViteServer({
         server: { middlewareMode: true },
         appType: "spa",

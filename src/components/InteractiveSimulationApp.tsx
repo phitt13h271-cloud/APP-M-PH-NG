@@ -74,9 +74,16 @@ export default function InteractiveSimulationApp() {
           });
           
           if (!response.ok) {
+              const errData = await response.json().catch(() => null);
               if (response.status === 429) {
                   setObjectInfo({ name: "Hệ thống bận", function: "Thầy/Cô ơi, API đang bận hoặc hết lượt dùng. Xin vui lòng cài đặt API Key trong Cài đặt!" });
                   speak("API đang bận hoặc hết lượt dùng. Xin vui lòng cài đặt API Key.");
+              } else if (response.status === 401) {
+                  setObjectInfo({ name: "Thiếu API Key", function: "Vui lòng nhập Gemini API Key trong phần Cài đặt (Biểu tượng bánh răng ở góc phải)." });
+              } else if (response.status === 413) {
+                  setObjectInfo({ name: "Ảnh quá lớn", function: "Kích thước ảnh quá lớn. Vui lòng chọn ảnh khác nhỏ hơn." });
+              } else {
+                  setObjectInfo({ name: "Lỗi kết nối", function: errData?.error || "Không thể phân tích hình ảnh. Vui lòng thử lại sau." });
               }
               setExtractedObjects([]);
               return;
